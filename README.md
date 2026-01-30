@@ -1,2 +1,2 @@
 # ansible-upgrade
-Ansible playbook to update LXCs
+Ansible playbook to upgrade LXCs
