@@ -1,0 +1,19 @@
+---
+- name: Upgrade all LXC containers
+  hosts: lxc
+  become: yes
+  serial: 5
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: dist
+        autoremove: yes
+
+    - name: Reboot container if kernel updated
+      reboot:
+        reboot_timeout: 300
+      when: ansible_facts.packages['linux-image-generic'] is defined
